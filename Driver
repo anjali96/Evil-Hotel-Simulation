@@ -1,0 +1,87 @@
+import java.util.Scanner;
+
+public class Driver {
+	
+	public static void main(String[] args){
+		String usrInputContinue;
+		
+		System.out.println("What is your Hotel Name\n");
+		Scanner keyboard = new Scanner(System.in);
+		String usrInputHotelName= keyboard.nextLine();
+		//System.out.println("the Hotel Name entered by you is " + usrInputHotelName);
+		
+		System.out.println("What is your Starting Rate\n");
+		keyboard = new Scanner(System.in);
+		double usrInputNightlyRate= keyboard.nextDouble();
+		//System.out.println("the rate entered by you is " + usrInputNightlyRate);
+		
+
+		Hotel evilHotel = new Hotel(usrInputHotelName,usrInputNightlyRate);
+		evilHotel.printHotelDetails();
+		do{
+			//Get guest info
+			while (true){
+				System.out.println("Enter Your Guest's Name <or quit to continue>");
+				keyboard = new Scanner(System.in);
+				String usrInputGuestName= keyboard.nextLine();
+				if (usrInputGuestName.equals("quit"))
+					break;
+				//System.out.println("the Guest Name entered by you is " + usrInputGuestName);
+				
+				System.out.println("And how many Nights are you staying, "+ usrInputGuestName+"?");
+				keyboard = new Scanner(System.in);
+				int usrInputNoOfNights= keyboard.nextInt();
+				//System.out.println("the rate entered by you is " + usrInputNoOfNights);
+				Guest newGuest = new Guest(usrInputGuestName,usrInputNoOfNights);			
+				evilHotel.addGuestsToHotel(newGuest);
+				
+			}
+			evilHotel.printHotelDetails();
+			
+			//Get additional amount info flight delay
+			System.out.println("\nWould you like to Delay the flight (y/n)? I can Alert our man inside");
+			keyboard = new Scanner(System.in);
+			String usrInputDelayFlight= keyboard.nextLine();
+			if (usrInputDelayFlight.equals("y")){
+				System.out.println("As you wish");
+				evilHotel.delayFlight();
+				evilHotel.calculateAmountFromGuests();
+				Guest[] hotelGuest=evilHotel.getGuestArray();
+				for (int i=0; i<evilHotel.getTotalNumberofGuests();i++){
+					if (!hotelGuest[i].isStaying())
+						System.out.println(hotelGuest[i].getGuestName()+ " doesn't have money to stay here! They are leaving");
+					
+				}
+				evilHotel.printHotelDetails();
+			}
+				
+			//Get additional amount info 
+			System.out.println("\nWould you like to change the nightly rate");
+			keyboard = new Scanner(System.in);
+			String usrInputIncreaseRate= keyboard.nextLine();
+			if (usrInputIncreaseRate.equals("y")){
+				System.out.println("What shall the new rate be?");
+				keyboard = new Scanner(System.in);
+				double newRate= keyboard.nextDouble();
+				evilHotel.setNightlyRate(newRate);
+				evilHotel.calculateAmountFromGuests();
+				Guest[] hotelGuest=evilHotel.getGuestArray();
+				for (int i=0; i<evilHotel.getTotalNumberofGuests();i++){
+					if (!hotelGuest[i].isStaying())
+						System.out.println(hotelGuest[i].getGuestName()+ " doesn't have money to stay here! They are leaving");
+					
+				}
+				evilHotel.printHotelDetails();
+			}
+			
+			//for continuation
+			
+			System.out.println("Would you like to continue (y/n)");
+			keyboard = new Scanner(System.in);
+			usrInputContinue= keyboard.nextLine();
+			
+		}while (usrInputContinue.equals("y"));
+	}	
+		
+		
+}
