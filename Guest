@@ -1,0 +1,37 @@
+public class guest{
+		
+		
+	private String guest;
+	private int nights;
+	private double total;
+	boolean staying;
+	
+	public int getNights  () {
+		return nights;
+	}
+	
+	public guest( String guest, int nights) {
+		this.guest = guest;
+		this.nights= nights;
+	}
+	
+	public boolean getStaying(){
+		return staying;
+	}
+	
+	public int noOfNights () {
+		this.nights++;
+		return nights;
+	}
+	
+	public double totalRate ( int newRate) {
+		this.total = this.total + newRate;
+		return total;
+	}
+	
+	public String toString() {
+		return "Guest [" + guest + "] staying [" + nights+" ] nights";
+	}
+	
+}
+	
