@@ -1,0 +1,49 @@
+public class evilHotelStimulation{
+
+	public static void main (String[] args) {
+		Sysytem.out.println("What is the name of your hotel?");
+		
+		Scanner keyboard = new Scanner(System.in);
+		String hotelName = keyboard.nextLine();
+	
+		Sysytem.out.println("What is your starting rate?");
+		
+		Scanner keyboard = new Scanner(System.in);
+		String startRate = keyboard.nextLine();
+		
+		Sysytem.out.println("Hotel " + hotelName + " Current rate of $" + startRate " per night. 0 customers: ");
+		Sysytem.out.println(hotelName + " will make $0.00 off the customers currently booked");
+		
+		int i=0;
+		do { 
+			
+			If(i<10) {
+				Sysytem.out.println("Enter the guest's name <or quit to continue>:);
+				String guest[i] = keyboard.nextLine();
+			
+				if ( guest[i].equals("quit")) {
+					break;
+				}
+			
+				Sysytem.out.println("And how many nights are you staying, " + guest[i]);
+				int nights = keyboard.nextLine();
+			
+				i++;
+				
+				} else {
+					boolean canStay= hasMoney();
+					if (canStay) {
+						int guestNo = cannotStay();
+						System.out.println(guest[guestNo] + " need to be kicked out as he has no money");
+					} else {
+						Sysytem.out.println("You cannot have any more guests");
+						break;
+					}
+				
+				}
+			
+		}
+	
+	}
+
+}
